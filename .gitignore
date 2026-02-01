@@ -1,0 +1,67 @@
+# Environment variables
+.env
+*.env
+.env.*
+
+# Wallet files (SECURITY - NEVER COMMIT)
+*.json
+!package.json
+!package-lock.json
+metamask_wallet.json
+test_wallet.json
+
+# Private keys and seeds (CRITICAL SECURITY)
+*seed*
+*private*
+*key*
+*wallet*
+*credentials*
+
+# Python virtual environment
+polymarket-env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs and data
+*.log
+logs/
+arbitrage_scans/*.log
+arbitrage_scans/*.json
+
+# Temporary files
+/tmp/
+*.tmp
+*.temp
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Project specific
+balance_*.txt
+transaction_*.json
+activity_*.log
+
+# Backup files
+*.bak
+*.backup
+*.old
