@@ -6,17 +6,28 @@ Built with Node.js, Python, and Web3 integration for automated profit generation
 
 ## ✨ Features
 
-### 🤖 **Automated Detection**
+### 🤖 **Advanced Automated Detection**
 - **Real-time scanning** of Polymarket markets for endgame arbitrage (95-99% probability markets)
 - **Cross-platform arbitrage** detection between Polymarket and Kalshi
 - **Silent execution** mode for continuous background operation
 - **Smart filtering** to identify high-probability opportunities
+- **Market maker pattern analysis** for sophisticated exploitation strategies
+- **Machine learning** opportunity ranking and success prediction
 
-### 💰 **Trading Strategies**
+### 💰 **Comprehensive Trading Strategies**
 - **Endgame Arbitrage**: Target markets near resolution with extreme probability skew
 - **Cross-Platform**: Exploit price differences between Polymarket and Kalshi
-- **Risk Management**: Position sizing and stop-loss mechanisms
-- **Compound Growth**: Reinvestment strategy for exponential scaling
+- **Market Maker Exploitation**: Identify and exploit MM behavior patterns
+- **ML-Enhanced Selection**: Use historical data to improve opportunity selection
+- **Advanced Risk Management**: Kelly Criterion position sizing with adaptive parameters
+- **Compound Growth**: Intelligent reinvestment strategy for exponential scaling
+
+### 📊 **Real-Time Monitoring & Control**
+- **Web Dashboard**: Real-time performance monitoring and system control
+- **WebSocket Updates**: Live data streaming for immediate insights
+- **Risk Analytics**: Comprehensive risk metrics and emergency controls
+- **ML Insights**: Actionable intelligence from pattern recognition
+- **Performance Tracking**: Detailed analytics with Sharpe ratio and drawdown analysis
 
 ### 🔧 **Technical Architecture**
 - **Node.js** detection engines with WebSocket support
@@ -64,6 +75,7 @@ POLYGON_RPC_URL="https://polygon-rpc.com"
 
 ### Usage
 
+#### Basic Operations
 ```bash
 # Check wallet balances
 source polymarket-env/bin/activate
@@ -77,6 +89,27 @@ node arbitrage_detector.js
 
 # Check system status
 node check_silent_status.js
+```
+
+#### Advanced Features
+```bash
+# Start real-time web dashboard
+node dashboard_server.js
+# Then visit http://localhost:3000
+
+# Advanced risk management
+node advanced_risk_manager.js report    # Generate risk report
+node advanced_risk_manager.js stop      # Emergency stop
+node advanced_risk_manager.js resume    # Resume trading
+
+# Machine learning insights
+python3 ml_opportunity_predictor.py insights  # Generate ML insights
+python3 ml_opportunity_predictor.py retrain   # Retrain model
+
+# Market maker analysis
+node market_maker_analyzer.js monitor        # Start MM monitoring
+node market_maker_analyzer.js report         # Generate MM report
+node market_maker_analyzer.js opportunities  # Show exploitable opportunities
 ```
 
 ## 📊 **Performance**
@@ -95,21 +128,31 @@ node check_silent_status.js
 
 ## 🛠 **System Components**
 
-### Detection Engines
+### Advanced Detection Engines
 - `arbitrage_detector.js` - Main opportunity scanner
 - `intensive_arbitrage_scanner.js` - Deep market analysis
 - `efficient_arbitrage_scanner.js` - Optimized resource usage
 - `silent_arbitrage_executor.js` - Background trading system
+- `market_maker_analyzer.js` - **NEW**: MM behavior analysis and exploitation
+- `ml_opportunity_predictor.py` - **NEW**: Machine learning opportunity ranking
 
-### Wallet Management
+### Risk & Portfolio Management
+- `advanced_risk_manager.js` - **NEW**: Kelly Criterion position sizing with adaptive parameters
 - `check_all_balances.py` - Multi-network balance checking
 - `check_wallet.py` - Primary wallet validation
 - `create_test_wallet.py` - Development wallet generation
 
-### Trading Infrastructure
-- `polymarket_trading_system/` - Core trading logic
+### Monitoring & Control
+- `dashboard_server.js` - **NEW**: Real-time web dashboard with WebSocket
 - `autonomous_trader.js` - Execution engine
 - `manual_arbitrage_guide.md` - Manual trading procedures
+
+### Core Trading Infrastructure
+- `polymarket_trading_system/` - Core trading logic with strategies
+- `polymarket_trading_system/src/strategies/endgame_arbitrage.py` - Endgame strategy implementation
+- `polymarket_trading_system/src/strategies/cross_platform.py` - Cross-platform arbitrage
+- `polymarket_trading_system/src/core/risk_manager.py` - Risk management core
+- `polymarket_trading_system/src/core/trading_engine.py` - Main execution engine
 
 ## 🔍 **Monitoring**
 
