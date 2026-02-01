@@ -759,8 +759,8 @@ class ArbitrageDashboard {
     
     start() {
         this.server.listen(this.port, () => {
-            console.log(\`🖥️  Dashboard server running on http://localhost:\${this.port}\`);
-            console.log(\`📊 WebSocket ready for real-time updates\`);
+            console.log(`🖥️  Dashboard server running on http://localhost:${this.port}`);
+            console.log(`📊 WebSocket ready for real-time updates`);
         });
     }
 }
