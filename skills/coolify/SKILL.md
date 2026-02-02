@@ -2,14 +2,11 @@
 name: coolify
 description: Manage Coolify deployments, applications, databases, and services via the Coolify API. Use when the user wants to deploy, start, stop, restart, or manage applications hosted on Coolify.
 homepage: https://coolify.io
-repository: https://github.com/visiongeist/coolifycli
 user-invocable: true
-metadata: {"clawdbot":{"emoji":"🚀","requires":{"bins":["node"],"env":["COOLIFY_TOKEN","COOLIFY_API_URL"]},"primaryEnv":"COOLIFY_TOKEN"}}
+metadata: {"openclaw":{"emoji":"🚀","requires":{"bins":["node"],"env":["COOLIFY_TOKEN"]},"primaryEnv":"COOLIFY_TOKEN"}}
 ---
 
 # Coolify API Skill
-
-**Repository:** [github.com/visiongeist/coolifycli](https://github.com/visiongeist/coolifycli)
 
 Comprehensive management of Coolify deployments, applications, databases, services, and infrastructure via the Coolify API.
 
@@ -34,13 +31,9 @@ Use this skill when the user needs to:
    - Create token with appropriate permissions (`read`, `write`, `deploy`)
    - Set `COOLIFY_TOKEN` environment variable
 
-2. **Coolify API URL** (Optional) — For self-hosted instances:
-   - Set `COOLIFY_API_URL` environment variable (default: `https://app.coolify.io/api/v1`)
-   - Example: `export COOLIFY_API_URL="https://your-coolify.com/api/v1"`
+2. **bash, curl, jq** — Required for running bash scripts
 
-3. **Node.js 20+** — Required for running the CLI
-
-4. **API Access** — Coolify Cloud (`app.coolify.io`) or self-hosted instance
+3. **API Access** — Coolify Cloud (`app.coolify.io`) or self-hosted instance
 
 ## Quick Start
 
@@ -48,19 +41,19 @@ Use this skill when the user needs to:
 
 ```bash
 # List all applications
-{baseDir}/dist/coolify-cli.cjs applications list
+{baseDir}/scripts/coolify applications list
 
 # Get application details
-{baseDir}/dist/coolify-cli.cjs applications get --uuid abc-123
+{baseDir}/scripts/coolify applications get --uuid abc-123
 
 # Deploy an application
-{baseDir}/dist/coolify-cli.cjs deploy --uuid abc-123 --force
+{baseDir}/scripts/coolify deploy --uuid abc-123 --force
 
 # View application logs
-{baseDir}/dist/coolify-cli.cjs applications logs --uuid abc-123
+{baseDir}/scripts/coolify applications logs --uuid abc-123
 
 # Restart an application
-{baseDir}/dist/coolify-cli.cjs applications restart --uuid abc-123
+{baseDir}/scripts/coolify applications restart --uuid abc-123
 ```
 
 ---
@@ -70,7 +63,7 @@ Use this skill when the user needs to:
 ### List Applications
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs applications list
+{baseDir}/scripts/coolify applications list
 ```
 
 **Output:**
@@ -92,36 +85,36 @@ Use this skill when the user needs to:
 ### Get Application Details
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs applications get --uuid abc-123
+{baseDir}/scripts/coolify applications get --uuid abc-123
 ```
 
 ### Application Lifecycle
 
 ```bash
 # Start
-{baseDir}/dist/coolify-cli.cjs applications start --uuid abc-123
+{baseDir}/scripts/coolify applications start --uuid abc-123
 
 # Stop
-{baseDir}/dist/coolify-cli.cjs applications stop --uuid abc-123
+{baseDir}/scripts/coolify applications stop --uuid abc-123
 
 # Restart
-{baseDir}/dist/coolify-cli.cjs applications restart --uuid abc-123
+{baseDir}/scripts/coolify applications restart --uuid abc-123
 ```
 
 ### View Logs
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs applications logs --uuid abc-123
+{baseDir}/scripts/coolify applications logs --uuid abc-123
 ```
 
 ### Environment Variables
 
 ```bash
 # List environment variables
-{baseDir}/dist/coolify-cli.cjs applications envs list --uuid abc-123
+{baseDir}/scripts/coolify applications envs list --uuid abc-123
 
 # Create environment variable
-{baseDir}/dist/coolify-cli.cjs applications envs create \
+{baseDir}/scripts/coolify applications envs create \
   --uuid abc-123 \
   --key DATABASE_URL \
   --value "postgres://user:pass@host:5432/db" \
@@ -129,18 +122,18 @@ Use this skill when the user needs to:
   --is-buildtime false
 
 # Update environment variable
-{baseDir}/dist/coolify-cli.cjs applications envs update \
+{baseDir}/scripts/coolify applications envs update \
   --uuid abc-123 \
   --env-uuid env-456 \
   --value "new-value"
 
 # Bulk update environment variables
-{baseDir}/dist/coolify-cli.cjs applications envs bulk-update \
+{baseDir}/scripts/coolify applications envs bulk-update \
   --uuid abc-123 \
   --json '{"DATABASE_URL":"postgres://...","API_KEY":"..."}'
 
 # Delete environment variable
-{baseDir}/dist/coolify-cli.cjs applications envs delete \
+{baseDir}/scripts/coolify applications envs delete \
   --uuid abc-123 \
   --env-uuid env-456
 ```
@@ -149,7 +142,7 @@ Use this skill when the user needs to:
 
 ```bash
 # Public Git repository
-{baseDir}/dist/coolify-cli.cjs applications create-public \
+{baseDir}/scripts/coolify applications create-public \
   --project-uuid proj-123 \
   --server-uuid server-456 \
   --git-repository "https://github.com/user/repo" \
@@ -157,7 +150,7 @@ Use this skill when the user needs to:
   --name "My App"
 
 # Private GitHub App
-{baseDir}/dist/coolify-cli.cjs applications create-private-github-app \
+{baseDir}/scripts/coolify applications create-private-github-app \
   --project-uuid proj-123 \
   --server-uuid server-456 \
   --github-app-uuid gh-789 \
@@ -165,21 +158,21 @@ Use this skill when the user needs to:
   --git-branch main
 
 # Dockerfile
-{baseDir}/dist/coolify-cli.cjs applications create-dockerfile \
+{baseDir}/scripts/coolify applications create-dockerfile \
   --project-uuid proj-123 \
   --server-uuid server-456 \
   --dockerfile-location "./Dockerfile" \
   --name "My Docker App"
 
 # Docker Image
-{baseDir}/dist/coolify-cli.cjs applications create-dockerimage \
+{baseDir}/scripts/coolify applications create-dockerimage \
   --project-uuid proj-123 \
   --server-uuid server-456 \
   --docker-image "nginx:latest" \
   --name "Nginx"
 
 # Docker Compose
-{baseDir}/dist/coolify-cli.cjs applications create-dockercompose \
+{baseDir}/scripts/coolify applications create-dockercompose \
   --project-uuid proj-123 \
   --server-uuid server-456 \
   --docker-compose-location "./docker-compose.yml"
@@ -192,36 +185,36 @@ Use this skill when the user needs to:
 ### List Databases
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs databases list
+{baseDir}/scripts/coolify databases list
 ```
 
 ### Get Database Details
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs databases get --uuid db-123
+{baseDir}/scripts/coolify databases get --uuid db-123
 ```
 
 ### Database Lifecycle
 
 ```bash
 # Start
-{baseDir}/dist/coolify-cli.cjs databases start --uuid db-123
+{baseDir}/scripts/coolify databases start --uuid db-123
 
 # Stop
-{baseDir}/dist/coolify-cli.cjs databases stop --uuid db-123
+{baseDir}/scripts/coolify databases stop --uuid db-123
 
 # Restart
-{baseDir}/dist/coolify-cli.cjs databases restart --uuid db-123
+{baseDir}/scripts/coolify databases restart --uuid db-123
 
 # Delete
-{baseDir}/dist/coolify-cli.cjs databases delete --uuid db-123
+{baseDir}/scripts/coolify databases delete --uuid db-123
 ```
 
 ### Create Databases
 
 ```bash
 # PostgreSQL
-{baseDir}/dist/coolify-cli.cjs databases create-postgresql \
+{baseDir}/scripts/coolify databases create-postgresql \
   --project-uuid proj-123 \
   --server-uuid server-456 \
   --name "my-postgres" \
@@ -230,43 +223,43 @@ Use this skill when the user needs to:
   --postgres-db myapp
 
 # MySQL
-{baseDir}/dist/coolify-cli.cjs databases create-mysql \
+{baseDir}/scripts/coolify databases create-mysql \
   --project-uuid proj-123 \
   --server-uuid server-456 \
   --name "my-mysql"
 
 # MariaDB
-{baseDir}/dist/coolify-cli.cjs databases create-mariadb \
+{baseDir}/scripts/coolify databases create-mariadb \
   --project-uuid proj-123 \
   --server-uuid server-456 \
   --name "my-mariadb"
 
 # MongoDB
-{baseDir}/dist/coolify-cli.cjs databases create-mongodb \
+{baseDir}/scripts/coolify databases create-mongodb \
   --project-uuid proj-123 \
   --server-uuid server-456 \
   --name "my-mongo"
 
 # Redis
-{baseDir}/dist/coolify-cli.cjs databases create-redis \
+{baseDir}/scripts/coolify databases create-redis \
   --project-uuid proj-123 \
   --server-uuid server-456 \
   --name "my-redis"
 
 # KeyDB
-{baseDir}/dist/coolify-cli.cjs databases create-keydb \
+{baseDir}/scripts/coolify databases create-keydb \
   --project-uuid proj-123 \
   --server-uuid server-456 \
   --name "my-keydb"
 
 # ClickHouse
-{baseDir}/dist/coolify-cli.cjs databases create-clickhouse \
+{baseDir}/scripts/coolify databases create-clickhouse \
   --project-uuid proj-123 \
   --server-uuid server-456 \
   --name "my-clickhouse"
 
 # Dragonfly
-{baseDir}/dist/coolify-cli.cjs databases create-dragonfly \
+{baseDir}/scripts/coolify databases create-dragonfly \
   --project-uuid proj-123 \
   --server-uuid server-456 \
   --name "my-dragonfly"
@@ -276,37 +269,37 @@ Use this skill when the user needs to:
 
 ```bash
 # List backup configurations
-{baseDir}/dist/coolify-cli.cjs databases backups list --uuid db-123
+{baseDir}/scripts/coolify databases backups list --uuid db-123
 
 # Create backup configuration
-{baseDir}/dist/coolify-cli.cjs databases backups create \
+{baseDir}/scripts/coolify databases backups create \
   --uuid db-123 \
   --frequency "0 2 * * *" \
   --enabled true
 
 # Get backup details
-{baseDir}/dist/coolify-cli.cjs databases backups get \
+{baseDir}/scripts/coolify databases backups get \
   --uuid db-123 \
   --backup-uuid backup-456
 
 # Update backup
-{baseDir}/dist/coolify-cli.cjs databases backups update \
+{baseDir}/scripts/coolify databases backups update \
   --uuid db-123 \
   --backup-uuid backup-456 \
   --frequency "0 3 * * *"
 
 # Trigger manual backup
-{baseDir}/dist/coolify-cli.cjs databases backups trigger \
+{baseDir}/scripts/coolify databases backups trigger \
   --uuid db-123 \
   --backup-uuid backup-456
 
 # List backup executions
-{baseDir}/dist/coolify-cli.cjs databases backups executions \
+{baseDir}/scripts/coolify databases backups executions \
   --uuid db-123 \
   --backup-uuid backup-456
 
 # Delete backup configuration
-{baseDir}/dist/coolify-cli.cjs databases backups delete \
+{baseDir}/scripts/coolify databases backups delete \
   --uuid db-123 \
   --backup-uuid backup-456
 ```
@@ -318,35 +311,35 @@ Use this skill when the user needs to:
 ### List Services
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs services list
+{baseDir}/scripts/coolify services list
 ```
 
 ### Get Service Details
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs services get --uuid service-123
+{baseDir}/scripts/coolify services get --uuid service-123
 ```
 
 ### Service Lifecycle
 
 ```bash
 # Start
-{baseDir}/dist/coolify-cli.cjs services start --uuid service-123
+{baseDir}/scripts/coolify services start --uuid service-123
 
 # Stop
-{baseDir}/dist/coolify-cli.cjs services stop --uuid service-123
+{baseDir}/scripts/coolify services stop --uuid service-123
 
 # Restart
-{baseDir}/dist/coolify-cli.cjs services restart --uuid service-123
+{baseDir}/scripts/coolify services restart --uuid service-123
 
 # Delete
-{baseDir}/dist/coolify-cli.cjs services delete --uuid service-123
+{baseDir}/scripts/coolify services delete --uuid service-123
 ```
 
 ### Create Service
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs services create \
+{baseDir}/scripts/coolify services create \
   --project-uuid proj-123 \
   --server-uuid server-456 \
   --name "My Service" \
@@ -357,27 +350,27 @@ Use this skill when the user needs to:
 
 ```bash
 # List
-{baseDir}/dist/coolify-cli.cjs services envs list --uuid service-123
+{baseDir}/scripts/coolify services envs list --uuid service-123
 
 # Create
-{baseDir}/dist/coolify-cli.cjs services envs create \
+{baseDir}/scripts/coolify services envs create \
   --uuid service-123 \
   --key API_KEY \
   --value "secret"
 
 # Update
-{baseDir}/dist/coolify-cli.cjs services envs update \
+{baseDir}/scripts/coolify services envs update \
   --uuid service-123 \
   --env-uuid env-456 \
   --value "new-secret"
 
 # Bulk update
-{baseDir}/dist/coolify-cli.cjs services envs bulk-update \
+{baseDir}/scripts/coolify services envs bulk-update \
   --uuid service-123 \
   --json '{"API_KEY":"secret","DB_HOST":"localhost"}'
 
 # Delete
-{baseDir}/dist/coolify-cli.cjs services envs delete \
+{baseDir}/scripts/coolify services envs delete \
   --uuid service-123 \
   --env-uuid env-456
 ```
@@ -390,38 +383,38 @@ Use this skill when the user needs to:
 
 ```bash
 # Deploy by UUID
-{baseDir}/dist/coolify-cli.cjs deploy --uuid abc-123
+{baseDir}/scripts/coolify deploy --uuid abc-123
 
 # Force rebuild
-{baseDir}/dist/coolify-cli.cjs deploy --uuid abc-123 --force
+{baseDir}/scripts/coolify deploy --uuid abc-123 --force
 
 # Deploy by tag
-{baseDir}/dist/coolify-cli.cjs deploy --tag production
+{baseDir}/scripts/coolify deploy --tag production
 
 # Instant deploy (skip queue)
-{baseDir}/dist/coolify-cli.cjs deploy --uuid abc-123 --instant-deploy
+{baseDir}/scripts/coolify deploy --uuid abc-123 --instant-deploy
 ```
 
 ### List Deployments
 
 ```bash
 # List all running deployments
-{baseDir}/dist/coolify-cli.cjs deployments list
+{baseDir}/scripts/coolify deployments list
 
 # List deployments for specific application
-{baseDir}/dist/coolify-cli.cjs deployments list-for-app --uuid abc-123
+{baseDir}/scripts/coolify deployments list-for-app --uuid abc-123
 ```
 
 ### Get Deployment Details
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs deployments get --uuid deploy-456
+{baseDir}/scripts/coolify deployments get --uuid deploy-456
 ```
 
 ### Cancel Deployment
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs deployments cancel --uuid deploy-456
+{baseDir}/scripts/coolify deployments cancel --uuid deploy-456
 ```
 
 ---
@@ -431,19 +424,19 @@ Use this skill when the user needs to:
 ### List Servers
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs servers list
+{baseDir}/scripts/coolify servers list
 ```
 
 ### Get Server Details
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs servers get --uuid server-123
+{baseDir}/scripts/coolify servers get --uuid server-123
 ```
 
 ### Create Server
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs servers create \
+{baseDir}/scripts/coolify servers create \
   --name "Production Server" \
   --ip "192.168.1.100" \
   --port 22 \
@@ -454,7 +447,7 @@ Use this skill when the user needs to:
 ### Update Server
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs servers update \
+{baseDir}/scripts/coolify servers update \
   --uuid server-123 \
   --name "Updated Name" \
   --description "Production environment"
@@ -463,23 +456,23 @@ Use this skill when the user needs to:
 ### Validate Server
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs servers validate --uuid server-123
+{baseDir}/scripts/coolify servers validate --uuid server-123
 ```
 
 ### Get Server Resources
 
 ```bash
 # List all resources on server
-{baseDir}/dist/coolify-cli.cjs servers resources --uuid server-123
+{baseDir}/scripts/coolify servers resources --uuid server-123
 
 # Get domains configured on server
-{baseDir}/dist/coolify-cli.cjs servers domains --uuid server-123
+{baseDir}/scripts/coolify servers domains --uuid server-123
 ```
 
 ### Delete Server
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs servers delete --uuid server-123
+{baseDir}/scripts/coolify servers delete --uuid server-123
 ```
 
 ---
@@ -489,19 +482,19 @@ Use this skill when the user needs to:
 ### List Projects
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs projects list
+{baseDir}/scripts/coolify projects list
 ```
 
 ### Get Project Details
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs projects get --uuid proj-123
+{baseDir}/scripts/coolify projects get --uuid proj-123
 ```
 
 ### Create Project
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs projects create \
+{baseDir}/scripts/coolify projects create \
   --name "My Project" \
   --description "Production project"
 ```
@@ -509,7 +502,7 @@ Use this skill when the user needs to:
 ### Update Project
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs projects update \
+{baseDir}/scripts/coolify projects update \
   --uuid proj-123 \
   --name "Updated Name"
 ```
@@ -517,27 +510,27 @@ Use this skill when the user needs to:
 ### Delete Project
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs projects delete --uuid proj-123
+{baseDir}/scripts/coolify projects delete --uuid proj-123
 ```
 
 ### Environments
 
 ```bash
 # List environments
-{baseDir}/dist/coolify-cli.cjs projects environments list --uuid proj-123
+{baseDir}/scripts/coolify projects environments list --uuid proj-123
 
 # Create environment
-{baseDir}/dist/coolify-cli.cjs projects environments create \
+{baseDir}/scripts/coolify projects environments create \
   --uuid proj-123 \
   --name "staging"
 
 # Get environment details
-{baseDir}/dist/coolify-cli.cjs projects environments get \
+{baseDir}/scripts/coolify projects environments get \
   --uuid proj-123 \
   --environment staging
 
 # Delete environment
-{baseDir}/dist/coolify-cli.cjs projects environments delete \
+{baseDir}/scripts/coolify projects environments delete \
   --uuid proj-123 \
   --environment staging
 ```
@@ -549,25 +542,25 @@ Use this skill when the user needs to:
 ### List Teams
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs teams list
+{baseDir}/scripts/coolify teams list
 ```
 
 ### Get Current Team
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs teams current
+{baseDir}/scripts/coolify teams current
 ```
 
 ### Get Team Members
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs teams members
+{baseDir}/scripts/coolify teams members
 ```
 
 ### Get Team by ID
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs teams get --id 1
+{baseDir}/scripts/coolify teams get --id 1
 ```
 
 ---
@@ -577,19 +570,19 @@ Use this skill when the user needs to:
 ### List Private Keys
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs security keys list
+{baseDir}/scripts/coolify security keys list
 ```
 
 ### Get Private Key
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs security keys get --uuid key-123
+{baseDir}/scripts/coolify security keys get --uuid key-123
 ```
 
 ### Create Private Key
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs security keys create \
+{baseDir}/scripts/coolify security keys create \
   --name "Production Key" \
   --description "SSH key for production servers" \
   --private-key "$(cat ~/.ssh/id_rsa)"
@@ -598,7 +591,7 @@ Use this skill when the user needs to:
 ### Update Private Key
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs security keys update \
+{baseDir}/scripts/coolify security keys update \
   --uuid key-123 \
   --name "Updated Key Name"
 ```
@@ -606,7 +599,7 @@ Use this skill when the user needs to:
 ### Delete Private Key
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs security keys delete --uuid key-123
+{baseDir}/scripts/coolify security keys delete --uuid key-123
 ```
 
 ---
@@ -616,19 +609,19 @@ Use this skill when the user needs to:
 ### List GitHub Apps
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs github-apps list
+{baseDir}/scripts/coolify github-apps list
 ```
 
 ### Get GitHub App
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs github-apps get --uuid gh-123
+{baseDir}/scripts/coolify github-apps get --uuid gh-123
 ```
 
 ### Create GitHub App
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs github-apps create \
+{baseDir}/scripts/coolify github-apps create \
   --name "My GitHub App" \
   --app-id 123456 \
   --installation-id 789012 \
@@ -638,7 +631,7 @@ Use this skill when the user needs to:
 ### Update GitHub App
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs github-apps update \
+{baseDir}/scripts/coolify github-apps update \
   --uuid gh-123 \
   --name "Updated App Name"
 ```
@@ -646,19 +639,19 @@ Use this skill when the user needs to:
 ### Delete GitHub App
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs github-apps delete --uuid gh-123
+{baseDir}/scripts/coolify github-apps delete --uuid gh-123
 ```
 
 ### List Repositories
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs github-apps repos --uuid gh-123
+{baseDir}/scripts/coolify github-apps repos --uuid gh-123
 ```
 
 ### List Branches
 
 ```bash
-{baseDir}/dist/coolify-cli.cjs github-apps branches \
+{baseDir}/scripts/coolify github-apps branches \
   --uuid gh-123 \
   --owner myorg \
   --repo myrepo
@@ -672,12 +665,12 @@ Use this skill when the user needs to:
 
 1. **List available servers:**
    ```bash
-   {baseDir}/dist/coolify-cli.cjs servers list
+   {baseDir}/scripts/coolify servers list
    ```
 
 2. **Create application:**
    ```bash
-   {baseDir}/dist/coolify-cli.cjs applications create-public \
+   {baseDir}/scripts/coolify applications create-public \
      --project-uuid proj-123 \
      --server-uuid server-456 \
      --git-repository "https://github.com/user/repo" \
@@ -687,7 +680,7 @@ Use this skill when the user needs to:
 
 3. **Configure environment variables:**
    ```bash
-   {baseDir}/dist/coolify-cli.cjs applications envs create \
+   {baseDir}/scripts/coolify applications envs create \
      --uuid <new-app-uuid> \
      --key DATABASE_URL \
      --value "postgres://..." \
@@ -696,14 +689,14 @@ Use this skill when the user needs to:
 
 4. **Deploy:**
    ```bash
-   {baseDir}/dist/coolify-cli.cjs deploy --uuid <new-app-uuid>
+   {baseDir}/scripts/coolify deploy --uuid <new-app-uuid>
    ```
 
 ### Set Up Database with Backups
 
 1. **Create database:**
    ```bash
-   {baseDir}/dist/coolify-cli.cjs databases create-postgresql \
+   {baseDir}/scripts/coolify databases create-postgresql \
      --project-uuid proj-123 \
      --server-uuid server-456 \
      --name "production-db"
@@ -711,7 +704,7 @@ Use this skill when the user needs to:
 
 2. **Configure daily backups:**
    ```bash
-   {baseDir}/dist/coolify-cli.cjs databases backups create \
+   {baseDir}/scripts/coolify databases backups create \
      --uuid <db-uuid> \
      --frequency "0 2 * * *" \
      --enabled true
@@ -719,7 +712,7 @@ Use this skill when the user needs to:
 
 3. **Trigger manual backup:**
    ```bash
-   {baseDir}/dist/coolify-cli.cjs databases backups trigger \
+   {baseDir}/scripts/coolify databases backups trigger \
      --uuid <db-uuid> \
      --backup-uuid <backup-uuid>
    ```
@@ -728,17 +721,17 @@ Use this skill when the user needs to:
 
 1. **Check application status:**
    ```bash
-   {baseDir}/dist/coolify-cli.cjs applications get --uuid abc-123
+   {baseDir}/scripts/coolify applications get --uuid abc-123
    ```
 
 2. **View recent logs:**
    ```bash
-   {baseDir}/dist/coolify-cli.cjs applications logs --uuid abc-123
+   {baseDir}/scripts/coolify applications logs --uuid abc-123
    ```
 
 3. **List recent deployments:**
    ```bash
-   {baseDir}/dist/coolify-cli.cjs deployments list-for-app --uuid abc-123
+   {baseDir}/scripts/coolify deployments list-for-app --uuid abc-123
    ```
 
 ---
@@ -754,7 +747,7 @@ Use this skill when the user needs to:
 export COOLIFY_TOKEN="your-token-here"
 ```
 
-Or configure in Clawdbot config at `~/.clawdbot/clawdbot.json`:
+Or configure in OpenClaw config at `~/.openclaw/openclaw.json`:
 ```json
 {
   "skills": {
@@ -780,7 +773,7 @@ Or configure in Clawdbot config at `~/.clawdbot/clawdbot.json`:
 **Solution:**
 ```bash
 # List all applications to find correct UUID
-{baseDir}/dist/coolify-cli.cjs applications list
+{baseDir}/scripts/coolify applications list
 ```
 
 ### "connect ECONNREFUSED"
@@ -802,17 +795,17 @@ export COOLIFY_API_URL="https://your-coolify.example.com/api/v1"
 **Solution:**
 1. Check deployment logs:
    ```bash
-   {baseDir}/dist/coolify-cli.cjs deployments get --uuid deploy-456
+   {baseDir}/scripts/coolify deployments get --uuid deploy-456
    ```
 
 2. Check application logs:
    ```bash
-   {baseDir}/dist/coolify-cli.cjs applications logs --uuid abc-123
+   {baseDir}/scripts/coolify applications logs --uuid abc-123
    ```
 
 3. Verify environment variables are correct:
    ```bash
-   {baseDir}/dist/coolify-cli.cjs applications envs list --uuid abc-123
+   {baseDir}/scripts/coolify applications envs list --uuid abc-123
    ```
 
 ### Node.js Not Found
@@ -881,11 +874,10 @@ export COOLIFY_TOKEN="your-token-here"
 
 ## Additional Resources
 
-- **This Skill Repository:** https://github.com/visiongeist/coolifycli
 - **Coolify Documentation:** https://coolify.io/docs/
 - **API Reference:** See `{baseDir}/references/API.md`
-- **Coolify GitHub:** https://github.com/coollabsio/coolify
-- **Coolify Discord:** https://coollabs.io/discord
+- **GitHub:** https://github.com/coollabsio/coolify
+- **Discord:** https://coollabs.io/discord
 
 ---
 
@@ -897,11 +889,11 @@ Most commands require UUIDs, not names. Always use `list` commands first to find
 
 ```bash
 # Bad: Using name (will fail)
-{baseDir}/dist/coolify-cli.cjs applications get --uuid "my-app"
+{baseDir}/scripts/coolify applications get --uuid "my-app"
 
 # Good: Using UUID
-{baseDir}/dist/coolify-cli.cjs applications list  # Find UUID first
-{baseDir}/dist/coolify-cli.cjs applications get --uuid abc-123
+{baseDir}/scripts/coolify applications list  # Find UUID first
+{baseDir}/scripts/coolify applications get --uuid abc-123
 ```
 
 ### Force Deployments
@@ -910,10 +902,10 @@ Use `--force` flag carefully as it rebuilds from scratch:
 
 ```bash
 # Normal deployment (uses cache)
-{baseDir}/dist/coolify-cli.cjs deploy --uuid abc-123
+{baseDir}/scripts/coolify deploy --uuid abc-123
 
 # Force rebuild (slower, but ensures clean build)
-{baseDir}/dist/coolify-cli.cjs deploy --uuid abc-123 --force
+{baseDir}/scripts/coolify deploy --uuid abc-123 --force
 ```
 
 ### Environment Variable Updates
@@ -922,13 +914,13 @@ After updating environment variables, restart the application:
 
 ```bash
 # Update env var
-{baseDir}/dist/coolify-cli.cjs applications envs update \
+{baseDir}/scripts/coolify applications envs update \
   --uuid abc-123 \
   --env-uuid env-456 \
   --value "new-value"
 
 # Restart to apply changes
-{baseDir}/dist/coolify-cli.cjs applications restart --uuid abc-123
+{baseDir}/scripts/coolify applications restart --uuid abc-123
 ```
 
 ### Backup Frequency
