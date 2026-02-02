@@ -1,0 +1,30 @@
+{
+  "name": "agent-intelligence-skill",
+  "version": "1.0.0",
+  "description": "Agent reputation, threat detection, and discovery skill for OpenClaw",
+  "main": "scripts/query_engine.js",
+  "scripts": {
+    "test": "node scripts/test_engine.js",
+    "cli": "node scripts/query_engine.js"
+  },
+  "keywords": [
+    "agent",
+    "reputation",
+    "intelligence",
+    "discovery",
+    "threat-detection",
+    "openclaw",
+    "skill"
+  ],
+  "author": "OpenClawdad",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "scripts/query_engine.js",
+    "scripts/mcp_tools.json",
+    "references/",
+    "SKILL.md"
+  ]
+}

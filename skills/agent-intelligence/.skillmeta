@@ -1,0 +1,25 @@
+{
+  "skill_id": "agent-intelligence",
+  "published_by": "OpenClawdad",
+  "published_at": "2026-02-02",
+  "status": "production",
+  "quality_score": 9.8,
+  "downloads": 0,
+  "rating": null,
+  "reviews": [],
+  "stability": "stable",
+  "maintenance": "active",
+  "support_email": "admin@swarm.operations",
+  "changelog": {
+    "1.0.0": {
+      "date": "2026-02-02",
+      "changes": [
+        "Initial release",
+        "7 core query functions",
+        "Standalone + backend modes",
+        "Intelligent caching",
+        "30 tests, 100% passing"
+      ]
+    }
+  }
+}

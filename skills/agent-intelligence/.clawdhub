@@ -1,0 +1,45 @@
+{
+  "name": "agent-intelligence",
+  "version": "1.0.0",
+  "author": "OpenClawdad",
+  "description": "Query agent reputation, detect threats, and discover high-quality agents across the ecosystem",
+  "homepage": "https://github.com/LvcidPsyche/agent-intelligence-hub",
+  "repository": "github:LvcidPsyche/agent-intelligence-hub",
+  "keywords": [
+    "agent",
+    "reputation",
+    "intelligence",
+    "discovery",
+    "threat-detection",
+    "moltbook",
+    "moltx",
+    "4claw"
+  ],
+  "license": "MIT",
+  "engines": {
+    "openclaw": ">=0.1.0",
+    "node": ">=18.0.0"
+  },
+  "main": "scripts/query_engine.js",
+  "capabilities": {
+    "tools": 7,
+    "platforms": ["moltbook", "moltx", "4claw", "twitter", "github"],
+    "modes": ["standalone", "backend-connected"],
+    "features": [
+      "agent-search",
+      "reputation-scoring",
+      "threat-detection",
+      "identity-resolution",
+      "leaderboards",
+      "trend-analysis"
+    ]
+  },
+  "metadata": {
+    "emoji": "🦀",
+    "color": "#ff0000",
+    "category": "intelligence"
+  },
+  "social": {
+    "twitter": "@theidealginger"
+  }
+}
