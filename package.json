@@ -1,0 +1,49 @@
+{
+  "name": "polymarket-arbitrage-bot-enterprise",
+  "version": "2.0.0",
+  "description": "Enterprise-grade prediction market arbitrage system with mathematical precision",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "start": "node dist/index.js",
+    "test": "ts-node tests/arbitrage_math.test.ts",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "polymarket",
+    "arbitrage",
+    "trading",
+    "prediction-markets",
+    "kalshi",
+    "algorithmic-trading",
+    "defi"
+  ],
+  "author": "OpenClawdad",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.14.2",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "winston": "^3.11.0",
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "@types/ws": "^8.5.8",
+    "@types/node-cron": "^3.0.11",
+    "typescript": "^5.2.2",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
+    "eslint": "^8.50.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
